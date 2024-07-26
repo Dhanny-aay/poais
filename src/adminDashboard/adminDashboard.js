@@ -1,30 +1,29 @@
 import { useContext, useEffect } from "react";
-import Headbar from "./components/headbar";
+import {
+  AdminActivePageContext,
+  AdminSidebarContext,
+} from "./contexts/AdminActivePageContext";
 import Sidebar from "./components/sidebar";
-import { ActivePageContext, SidebarContext } from "./context/ActivePageContext";
+import Headbar from "./components/headbar";
 import Home from "./components/home";
-import Application from "./components/application";
 import Payment from "./components/payment";
-import PermitValidation from "./components/permitValidation";
+import Application from "./components/application";
+import ApplicationView from "./components/applicationView";
 import Resources from "./components/resources";
 import Notification from "./components/notification";
-import EditApplication from "./components/editApplication";
-import Settings from "./components/settings";
 
-const Dashboard = () => {
+const AdminDashboard = () => {
   const componentMap = {
     Home: <Home />,
-    Application: <Application />,
     Payments: <Payment />,
-    Validation: <PermitValidation />,
+    Application: <Application />,
+    viewApplication: <ApplicationView />,
     Resources: <Resources />,
     Notifications: <Notification />,
-    editApplication: <EditApplication />,
-    Settings: <Settings />,
   };
 
-  const { activePage } = useContext(ActivePageContext);
-  const { setSidebarVisible } = useContext(SidebarContext);
+  const { activePage } = useContext(AdminActivePageContext);
+  const { setSidebarVisible } = useContext(AdminSidebarContext);
 
   useEffect(() => {
     setSidebarVisible(false);
@@ -43,4 +42,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default AdminDashboard;

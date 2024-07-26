@@ -5,6 +5,8 @@ import Login from "./auth/login";
 import Signup from "./auth/signup";
 import ConfirmCode from "./auth/confirmCode";
 import Dashboard from "./dashboard/dashboard";
+import AdminLogin from "./adminDashboard/login";
+import AdminDashboard from "./adminDashboard/adminDashboard";
 
 function App() {
   const location = useLocation();
@@ -18,9 +20,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/adminlogin" element={<AdminLogin />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/confirm-code" element={<ConfirmCode />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/admindashboard" element={<AdminDashboard />} />
       </Routes>
     </>
   );

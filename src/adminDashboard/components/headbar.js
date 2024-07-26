@@ -1,33 +1,25 @@
 import { useContext, useState } from "react";
-import {
-  ActivePageContext,
-  SidebarContext,
-} from "../context/ActivePageContext";
-import chev from "./assets/chevron-left.svg";
 import burger from "./assets/burger.svg";
-import ApplyPermitModal from "./applyPermitModal";
-import SuccessModal from "./successModal";
+import {
+  AdminActivePageContext,
+  AdminSidebarContext,
+} from "../contexts/AdminActivePageContext";
+import chev from "./assets/chevron-left.svg";
 
 const Headbar = () => {
-  const { activePage, setActivePage } = useContext(ActivePageContext);
-  const { sidebarVisible, setSidebarVisible } = useContext(SidebarContext);
-  const [makeModalVisible, setMakeModalVisible] = useState(false);
-  const [successModal, setSucessModal] = useState(false);
-
-  const toggleSidebar = () => {
-    setSidebarVisible(!sidebarVisible);
-  };
+  const { activePage, setActivePage } = useContext(AdminActivePageContext);
+  const { sidebarVisible, setSidebarVisible } = useContext(AdminSidebarContext);
 
   const handleBackClick = () => {
     setActivePage("Home");
   };
 
+  const toggleSidebar = () => {
+    setSidebarVisible(!sidebarVisible);
+  };
+
   return (
     <>
-      {makeModalVisible && (
-        <ApplyPermitModal setMakeModalVisible={setMakeModalVisible} />
-      )}
-      {successModal && <SuccessModal setSucessModal={setSucessModal} />}
       <div className="  w-full lg:w-[80%] fixed top-0 lg:left-[20%] h-[72px] px-8 py-3 z-[99] border-b bg-[#fff] border-[#EAEBF0] flex flex-row justify-between items-center">
         <div className=" flex items-center space-x-4 lg:space-x-0">
           <img
@@ -55,14 +47,6 @@ const Headbar = () => {
             </div>
           )}
         </div>
-        <button
-          onClick={() => {
-            setMakeModalVisible(true);
-          }}
-          className=" bg-[#01903C] py-2 px-4 rounded-[8px] font-Inter text-white font-semibold text-xs"
-        >
-          Apply for Permit
-        </button>
       </div>
     </>
   );

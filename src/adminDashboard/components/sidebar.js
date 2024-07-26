@@ -1,45 +1,36 @@
 import { useContext } from "react";
-import {
-  ActivePageContext,
-  SidebarContext,
-} from "../context/ActivePageContext";
-
 import home from "./assets/House.svg";
 import homeAc from "./assets/HouseAc.svg";
 import folder from "./assets/Folders.svg";
 import folderAc from "./assets/FoldersAc.svg";
 import wallet from "./assets/Wallet.svg";
 import walletAc from "./assets/WalletAc.svg";
-import fileSearch from "./assets/FileSearch.svg";
-import fileSearchAc from "./assets/FileSearchAc.svg";
 import bell from "./assets/BellRinging.svg";
 import bellAc from "./assets/BellRingingAc.svg";
 import resour from "./assets/BookOpenText.svg";
 import logo from "./assets/Logo.svg";
 import close from "./assets/close.svg";
-import chat from "./assets/ChatText.svg";
 import gear from "./assets/Gear.svg";
 import logout from "./assets/logout.svg";
+import {
+  AdminActivePageContext,
+  AdminSidebarContext,
+} from "../contexts/AdminActivePageContext";
 
 const Sidebar = () => {
-  const { activePage, setActivePage } = useContext(ActivePageContext);
-  const { sidebarVisible, setSidebarVisible } = useContext(SidebarContext);
+  const { activePage, setActivePage } = useContext(AdminActivePageContext);
+  const { sidebarVisible, setSidebarVisible } = useContext(AdminSidebarContext);
 
   const sidebar = [
     { name: "Home", img: home, activeImg: homeAc, page: "Home" },
     {
-      name: "My Application",
+      name: "Application",
       img: folder,
       activeImg: folderAc,
       page: "Application",
     },
     { name: "Payments", img: wallet, activeImg: walletAc, page: "Payments" },
-    {
-      name: "Permit Validation",
-      img: fileSearch,
-      activeImg: fileSearchAc,
-      page: "Validation",
-    },
+
     {
       name: "Notifications",
       img: bell,
@@ -54,10 +45,7 @@ const Sidebar = () => {
     },
   ];
 
-  const bottom = [
-    { name: "Support", img: chat, activeImg: chat, page: "Support" },
-    { name: "Settings", img: gear, activeImg: gear, page: "Settings" },
-  ];
+  const bottom = [{ name: "Logout", img: logout, activeImg: logout }];
 
   const handleClick = (page) => {
     setActivePage(page);
@@ -128,7 +116,7 @@ const Sidebar = () => {
                   >
                     <img
                       src={activePage === item.page ? item.activeImg : item.img}
-                      className="w-4 h-4"
+                      className="w-6"
                       alt=""
                     />
                     <p
@@ -144,7 +132,7 @@ const Sidebar = () => {
                 ))}
               </div>
 
-              <div className=" px-6">
+              {/* <div className=" px-6">
                 <div className=" mt-3 pt-3 border-t border-[#E4E7EC] w-full flex items-start justify-between">
                   <div className=" flex items-center space-x-4">
                     <span className=" w-8 h-8 bg-[#f5f5f5] rounded-full"></span>
@@ -159,7 +147,7 @@ const Sidebar = () => {
                   </div>
                   <img src={logout} alt="" />
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
