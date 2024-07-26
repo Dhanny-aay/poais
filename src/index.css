@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Inter";
+  src: url("./fonts/Inter-VariableFont_slnt\,wght.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Roboto_Black";
+  src: url("./fonts/Roboto-Black.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Cabin";
+  src: url("./fonts/Cabin-VariableFont_wdth\,wght.ttf") format("truetype");
+}
+
+.answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.9s ease;
+}
+.answ {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.9s ease;
+}
+@media (min-width: 769px) {
+  /* Apply max-height: 300px for screen sizes greater than 768px */
+  .answ {
+    max-height: 300px;
+  }
+}
+.faq.active .answer {
+  max-height: 300px;
+}
+.faq.active .answ {
+  max-height: 300px;
+}
+
+.faq.active img {
+  transform: rotate(180deg);
+}
