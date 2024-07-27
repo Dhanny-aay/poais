@@ -123,8 +123,8 @@ const ApplyPermitModal = ({ setMakeModalVisible }) => {
 
   return (
     <>
-      <div className=" w-[120%] h-[100vh] bg-[#1212128d] z-[99999] fixed top-0 -left-[20%] flex justify-center items-center">
-        <div className="ml-[20%] bg-[#FFFFFF] p-6 rounded-[15px] md:h-[500px] 2xl:h-[700px] w-[600px]">
+      <div className=" w-full md:w-[120%] h-full bg-[#1212128d] z-[99999] fixed top-0 md:-left-[20%] p-6 flex justify-center items-center">
+        <div className=" md:ml-[20%] bg-[#FFFFFF] p-6 rounded-[15px] h-[500px] 2xl:h-[700px] w-[600px]">
           <div className=" w-full h-full overflow-auto ">
             <span className=" w-full flex items-start justify-between">
               <img src={fileplus} className="" alt="" />

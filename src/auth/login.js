@@ -4,12 +4,12 @@ import logo from "./assets/Benue-State-Logo-New 1.svg";
 const Login = () => {
   return (
     <>
-      <div className="w-full h-dvh flex flex-col justify-center items-center p-12">
+      <div className="w-full h-dvh flex flex-col justify-center items-center p-6 md:p-12">
         <img src={logo} alt="Benue-State" />
-        <p className=" mt-4 font-Roboto_Black font-black text-3xl text-[#01903C]">
+        <p className=" mt-4 font-Roboto_Black text-center font-black text-3xl text-[#01903C]">
           BENUE STATE
         </p>
-        <p className=" mt-2 font-Roboto_Black font-black text-[#ED3237] text-xl">
+        <p className=" mt-2 font-Roboto_Black text-center font-black text-[#ED3237] text-xl">
           Public Order Application and Issuance System
         </p>
         <p className=" mt-2 font-Inter font-semibold text-2xl text-[#080808]">

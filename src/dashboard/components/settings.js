@@ -26,7 +26,7 @@ const Settings = () => {
           </button>
         </div>
 
-        <div className="flex items-center justify-between border-b border-[#EAEBF0] w-full pb-4 mt-5 pr-[15%]">
+        <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 items-start md:items-center justify-between border-b border-[#EAEBF0] w-full pb-4 mt-5 md:pr-[15%]">
           <div>
             <p className=" font-Inter font-semibold text-base text-[#344054]">
               Your photo
@@ -36,19 +36,19 @@ const Settings = () => {
             </p>
           </div>
 
-          <div className=" w-[500px] flex items-center justify-center">
+          <div className=" w-full md:w-[500px] flex items-center justify-center">
             <span className=" w-20 h-20 rounded-full bg-[#f5f5f5]"></span>
           </div>
         </div>
 
-        <div className="flex items-start justify-between border-b border-[#EAEBF0] w-full pb-4 mt-5 pr-[15%]">
+        <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 items-start justify-between border-b border-[#EAEBF0] w-full pb-4 mt-5 md:pr-[15%]">
           <div>
             <p className=" font-Inter font-semibold text-base text-[#344054]">
               Name
             </p>
           </div>
 
-          <div className=" w-[560px] flex items-center justify-between">
+          <div className=" w-full md:w-[560px] flex items-center justify-between">
             <label
               htmlFor=""
               className=" w-full flex flex-col font-Inter text-[#344054] font-medium text-xs "
@@ -63,14 +63,14 @@ const Settings = () => {
             </label>
           </div>
         </div>
-        <div className="flex items-start justify-between border-b border-[#EAEBF0] w-full pb-4 mt-5 pr-[15%]">
+        <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 items-start justify-between border-b border-[#EAEBF0] w-full pb-4 mt-5 md:pr-[15%]">
           <div>
             <p className=" font-Inter font-semibold text-base text-[#344054]">
               Email address
             </p>
           </div>
 
-          <div className=" w-[560px] flex items-center justify-between">
+          <div className=" w-full md:w-[560px] flex items-center justify-between">
             <label
               htmlFor=""
               className=" w-full flex flex-col font-Inter text-[#344054] font-medium text-xs "
@@ -85,14 +85,14 @@ const Settings = () => {
             </label>
           </div>
         </div>
-        <div className="flex items-start justify-between border-b border-[#EAEBF0] w-full pb-4 mt-5 pr-[15%]">
+        <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 items-start justify-between border-b border-[#EAEBF0] w-full pb-4 mt-5 md:pr-[15%]">
           <div>
             <p className=" font-Inter font-semibold text-base text-[#344054]">
               Home address
             </p>
           </div>
 
-          <div className=" w-[560px] flex items-center justify-between">
+          <div className=" w-full md:w-[560px] flex items-center justify-between">
             <label
               htmlFor=""
               className=" w-full flex flex-col font-Inter text-[#344054] font-medium text-xs "
@@ -107,14 +107,14 @@ const Settings = () => {
             </label>
           </div>
         </div>
-        <div className="flex items-start justify-between border-b border-[#EAEBF0] w-full pb-4 mt-5 pr-[15%]">
+        <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 items-start justify-between border-b border-[#EAEBF0] w-full pb-4 mt-5 md:pr-[15%]">
           <div>
             <p className=" font-Inter font-semibold text-base text-[#344054]">
               ID Document Verification
             </p>
           </div>
 
-          <div className=" w-[560px] flex items-center justify-between">
+          <div className=" w-full md:w-[560px] flex items-center justify-between">
             <label
               htmlFor=""
               className=" w-full flex flex-col font-Inter text-[#344054] font-medium text-xs "
@@ -129,14 +129,14 @@ const Settings = () => {
             </label>
           </div>
         </div>
-        <div className="flex items-start justify-between border-b border-[#EAEBF0] w-full pb-4 mt-5 pr-[15%]">
+        <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 items-start justify-between border-b border-[#EAEBF0] w-full pb-4 mt-5 md:pr-[15%]">
           <div>
             <p className=" font-Inter font-semibold text-base text-[#344054]">
               State of Origin
             </p>
           </div>
 
-          <div className=" w-[560px] flex items-center justify-between">
+          <div className=" w-full md:w-[560px] flex items-center justify-between">
             <label
               htmlFor=""
               className=" w-[48%] flex flex-col font-Inter text-[#344054] font-medium text-xs "
@@ -165,13 +165,13 @@ const Settings = () => {
             </label>
           </div>
         </div>
-        <div className="flex items-start justify-between border-b border-[#EAEBF0] w-full pb-4 mt-5 pr-[15%]">
+        <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 items-start justify-between border-b border-[#EAEBF0] w-full pb-4 mt-5 md:pr-[15%]">
           <div>
             <p className=" font-Inter font-semibold text-base text-[#344054]">
               Other information's
             </p>
           </div>
-          <div className=" w-[560px]">
+          <div className=" w-full md:w-[560px]">
             <div className=" w-full flex items-center justify-between">
               <label
                 htmlFor=""
@@ -230,13 +230,13 @@ const Settings = () => {
             </div>
           </div>
         </div>
-        <div className="flex items-start justify-between border-b border-[#EAEBF0] w-full pb-4 mt-5 pr-[15%]">
+        <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 items-start justify-between border-b border-[#EAEBF0] w-full pb-4 mt-5 md:pr-[15%]">
           <div>
             <p className=" font-Inter font-semibold text-base text-[#344054]">
               Next of Kin Information
             </p>
           </div>
-          <div className=" w-[560px]">
+          <div className=" w-full md:w-[560px]">
             <label
               htmlFor=""
               className=" w-full flex flex-col font-Inter text-[#344054] font-medium text-xs "

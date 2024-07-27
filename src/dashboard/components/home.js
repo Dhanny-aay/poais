@@ -97,7 +97,7 @@ const Home = () => {
           My Applications
         </p>
 
-        <div className=" grid grid-cols-3 gap-4 mt-4">
+        <div className=" grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
           {applicate.map((item, index) => (
             <div
               key={index}
@@ -120,7 +120,7 @@ const Home = () => {
         <p className=" font-Cabin font-bold text-xl text-black mt-6 ">
           Quick Actions
         </p>
-        <div className=" grid grid-cols-4 w-full gap-3 mt-3">
+        <div className=" grid grid-cols-2 md:grid-cols-4 w-full gap-3 mt-3">
           <button className=" w-full bg-[#3B82F6] rounded-[8px] py-4 text-center font-Inter font-semibold text-white text-sm">
             New Application
           </button>
@@ -128,10 +128,10 @@ const Home = () => {
             Scan QR Code
           </button>
           <button className=" w-full bg-[#EAB308] rounded-[8px] py-4 text-center font-Inter font-semibold text-white text-sm">
-            New Application
+            View Resources
           </button>
           <button className=" w-full bg-[#A855F7] rounded-[8px] py-4 text-center font-Inter font-semibold text-white text-sm">
-            New Application
+            Contact Support
           </button>
         </div>
 
@@ -145,8 +145,8 @@ const Home = () => {
           </button>
         </div>
 
-        <div className="overflow-x-auto mt-4">
-          <div className="min-w-full border border-[#EAEBF0] rounded-[10px]">
+        <div className="mt-4">
+          <div className="min-w-full border border-[#EAEBF0] overflow-x-auto  rounded-[10px]">
             <table className="min-w-full rounded-[10px]">
               <thead>
                 <th className="px-4 py-2 border-b text-left font-Cabin text-xs font-semibold text-black">

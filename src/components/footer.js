@@ -13,7 +13,7 @@ const Footer = () => {
     <>
       <div className=" bg-[#006531]">
         {/* 1 */}
-        <div className=" w-full px-14 py-8 flex items-center justify-between border-b border-[#01903C]">
+        <div className=" w-full px-4 md:px-14 py-8 space-y-8 md:space-y-0 flex flex-col md:flex-row items-start md:items-center md:justify-between border-b border-[#01903C]">
           <div className=" flex items-center space-x-6">
             <Link className=" text-[#FFFFFF] font-Cabin font-normal text-[17px]">
               About
@@ -41,8 +41,8 @@ const Footer = () => {
           </div>
         </div>
         {/* 2 */}
-        <div className=" w-full px-14 py-16 flex items-start justify-between">
-          <div className=" w-[330px]">
+        <div className=" w-full px-4 md:px-14 py-8 md:py-16 flex flex-col lg:flex-row items-start space-y-6 lg:space-y-0 md:justify-between">
+          <div className=" w-full md:w-[330px]">
             <img src={logo} alt="" />
             <p className=" mt-6 font-Cabin font-normal text-[17px] text-white">
               Kashim Ibrahim Way, Old GRA,  Government House, Makurdi
@@ -70,7 +70,7 @@ const Footer = () => {
             </span>
           </div>
 
-          <div className=" w-[330px]">
+          <div className=" w-full md:w-[330px]">
             <p className=" font-Inter font-semibold text-2xl text-white mb-4">
               Services{" "}
             </p>
@@ -90,7 +90,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className=" w-[330px]">
+          <div className=" w-full md:w-[330px]">
             <p className=" font-Inter font-semibold text-2xl text-white mb-4">
               Benue News & Updates
             </p>
@@ -103,7 +103,7 @@ const Footer = () => {
         </div>
 
         {/* 3 */}
-        <div className=" w-full flex justify-center items-center text-center text-white font-Inter font-normal text-base py-12">
+        <div className=" w-full flex justify-center items-center text-center text-white font-Inter font-normal text-base px-4 py-8 md:py-12">
           Copyright © 2024, Benue State Government. All rights reserved.
         </div>
       </div>

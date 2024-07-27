@@ -32,7 +32,7 @@ const Resources = () => {
         }}
         className=" absolute lg:left-[20%] top-[72px] w-full lg:w-[80%] p-6"
       >
-        <div className=" flex items-center w-full justify-between border-b border-[#EAEBF0] pb-4">
+        <div className=" flex flex-col md:flex-row space-y-3 md:space-y-0 items-start md:items-center w-full justify-between border-b border-[#EAEBF0] pb-4">
           <div>
             <p className=" font-Cabin font-bold text-xl text-[#101828]">
               Resources

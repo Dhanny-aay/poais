@@ -38,7 +38,7 @@ const Faq = () => {
 
   return (
     <>
-      <div className=" w-full px-14 py-16">
+      <div className=" w-full px-4 md:px-14 py-8 md:py-16">
         <p className=" font-Cabin font-bold text-center text-[#000] text-3xl">
           Frequently asked questions?
         </p>

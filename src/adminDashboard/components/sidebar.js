@@ -54,7 +54,7 @@ const Sidebar = () => {
   return (
     <>
       <div
-        className={`fixed top-0 left-0 z-[999] w-[80%] md:w-[40%] lg:w-[20%] h-[100vh] border-r border-[#E4E7EC] ${
+        className={`fixed top-0 left-0 z-[999] w-[80%] md:w-[40%] lg:w-[20%] h-[100vh] border-r border-[#E4E7EC] bg-white ${
           sidebarVisible
             ? "lg:translate-x-0 translate-x-0"
             : "lg:translate-x-0 -translate-x-full"

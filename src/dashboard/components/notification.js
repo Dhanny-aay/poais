@@ -57,7 +57,7 @@ const Notification = () => {
 
         <div className=" mt-6">
           <div className="w-full border-b border-[#EAECF0] h-full">
-            <div className="flex items-center">
+            <div className=" grid grid-cols-2 md:flex items-center">
               {buttons.map((button, index) => (
                 <button
                   key={index}

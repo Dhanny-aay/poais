@@ -39,8 +39,8 @@ const RejectedApp = () => {
 
   return (
     <>
-      <div className="overflow-x-auto">
-        <div className="min-w-full border border-[#EAEBF0] rounded-[10px]">
+      <div className="">
+        <div className="min-w-full border border-[#EAEBF0] overflow-x-auto rounded-[10px]">
           <table className="min-w-full">
             <thead>
               <tr>

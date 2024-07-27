@@ -20,7 +20,7 @@ const ApplicationView = () => {
         }}
         className=" absolute lg:left-[20%] top-[72px] w-full lg:w-[80%] p-6"
       >
-        <div className=" flex items-center w-full justify-between border-b border-[#EAEBF0] pb-4">
+        <div className=" flex flex-col md:flex-row space-y-3 md:space-y-0 items-start md:items-center w-full justify-between border-b border-[#EAEBF0] pb-4">
           <div>
             <p className=" font-Cabin font-bold text-xl text-[#101828]">
               Club house permit
@@ -29,15 +29,15 @@ const ApplicationView = () => {
               Application ID: DF11CA4
             </p>
           </div>
-          <div className=" flex items-center space-x-4">
-            <button className=" px-4 py-[10px] rounded-[8px] bg-[#01813F] text-center font-Inter text-sm font-semibold text-white">
+          <div className=" flex w-full md:w-auto justify-between md:justify-normal items-center space-x-4">
+            <button className=" w-[48%] md:w-auto px-4 py-[10px] rounded-[8px] bg-[#01813F] text-center font-Inter text-sm font-semibold text-white">
               Approve
             </button>
             <button
               onClick={() => {
                 setMakeVisible(true);
               }}
-              className=" px-4 py-[10px] rounded-[8px] bg-[#E84343] text-center font-Inter text-sm font-semibold text-white"
+              className=" w-[48%] md:w-auto px-4 py-[10px] rounded-[8px] bg-[#E84343] text-center font-Inter text-sm font-semibold text-white"
             >
               Deny
             </button>

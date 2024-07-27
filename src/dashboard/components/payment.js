@@ -85,7 +85,7 @@ const Payment = () => {
         }}
         className=" absolute lg:left-[20%] top-[72px] w-full lg:w-[80%] p-6"
       >
-        <div className=" flex items-start justify-between w-full">
+        <div className=" flex flex-col space-y-6 md:space-y-0 md:flex-row items-start justify-between w-full">
           <div className="">
             <p className=" font-Cabin font-bold text-xl text-[#101828]">
               Payment History
@@ -111,8 +111,8 @@ const Payment = () => {
           </label>
         </div>
 
-        <div className="overflow-x-auto mt-6">
-          <div className="min-w-full border border-[#EAEBF0] rounded-[10px]">
+        <div className="mt-6">
+          <div className="min-w-full border border-[#EAEBF0] rounded-[10px] overflow-x-auto">
             <table className="min-w-full rounded-[10px]">
               <thead>
                 <th className="px-4 py-2 border-b text-left font-Cabin text-xs font-semibold text-black">

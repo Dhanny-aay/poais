@@ -28,7 +28,7 @@ const Headbar = () => {
         <ApplyPermitModal setMakeModalVisible={setMakeModalVisible} />
       )}
       {successModal && <SuccessModal setSucessModal={setSucessModal} />}
-      <div className="  w-full lg:w-[80%] fixed top-0 lg:left-[20%] h-[72px] px-8 py-3 z-[99] border-b bg-[#fff] border-[#EAEBF0] flex flex-row justify-between items-center">
+      <div className="  w-full lg:w-[80%] fixed top-0 lg:left-[20%] h-[72px] px-6 md:px-8 py-3 z-[99] border-b bg-[#fff] border-[#EAEBF0] flex flex-row justify-between items-center">
         <div className=" flex items-center space-x-4 lg:space-x-0">
           <img
             src={burger}
@@ -37,7 +37,7 @@ const Headbar = () => {
             onClick={toggleSidebar}
           />
           {activePage === "Home" ? (
-            <p className="text-black font-bold text-2xl font-Cabin">
+            <p className="text-black font-bold text-base md:text-2xl font-Cabin">
               Welcome Back, Veek!
             </p>
           ) : (
@@ -49,7 +49,7 @@ const Headbar = () => {
                 <img src={chev} className=" w-4 h-4" alt="" />
                 Back
               </button>
-              <p className="text-black font-bold text-2xl font-Cabin">
+              <p className="text-black font-bold text-base md:text-2xl font-Cabin">
                 {activePage}
               </p>
             </div>

@@ -62,25 +62,25 @@ const Landing = () => {
           backgroundPosition: "",
           backgroundSize: "cover",
         }}
-        className=" w-full h-[600px] relative"
+        className=" w-full h-[800px] md:h-[600px] relative"
       >
-        <div className=" absolute left-0 top-0 w-full h-full bg-[#00000066] flex flex-col items-center justify-center px-[10%]">
-          <p className=" text-white font-Cabin font-bold text-[55px] leading-[67px] text-center">
+        <div className=" absolute left-0 top-0 w-full h-full bg-[#00000066] flex flex-col items-center justify-center px-4 md:px-[10%]">
+          <p className=" text-white font-Cabin font-bold text-5xl md:text-[55px] md:leading-[67px] text-center">
             Welcome to the Public Order Application and Issuance System
           </p>
-          <p className=" font-Inter text-white mt-3 text-lg text-center font-medium">
+          <p className=" font-Inter text-white mt-4 md:mt-3 text-base md:text-lg text-center font-medium">
             This system allows you to apply for various permits and licenses to
             operate beyond 12 AM in Benue State. Whether you're a business
             owner, event organizer, or individual, our streamlined process
             ensures efficient application and issuance of public order permits.
           </p>
-          <button className=" mt-8 py-3 px-6 bg-[#01903C] rounded-md text-white font-Inter font-semibold text-[15px]">
+          <button className=" mt-8 py-3 px-6 bg-[#01903C] rounded-md text-white font-Inter font-semibold text-sm md:text-[15px]">
             Apply Now
           </button>
         </div>
       </div>
       {/* about the system */}
-      <div className=" w-full py-16 px-14">
+      <div className=" w-full py-8 md:py-16 px-4 md:px-14">
         <p className=" font-Cabin font-bold text-center text-[#01903C] text-3xl">
           About the system
         </p>
@@ -88,11 +88,10 @@ const Landing = () => {
           Details about our cutting edge system for Public Order Application and
           Issuance.
         </p>
-        <div className=" w-full flex items-center justify-between mt-16">
-          <div className=" w-[48%]">
+        <div className=" w-full flex flex-col space-y-6 md:space-y-8 lg:space-y-0 lg:flex-row items-center justify-between mt-16">
+          <div className=" w-full lg:w-[48%]">
             <p className=" text-[#000000] font-Cabin font-bold text-3xl">
-              The Public Order Application and
-              <br /> Issuance System.
+              The Public Order Application and Issuance System.
             </p>
             <p className=" mt-4 text-[#000000B2] font-Inter font-normal text-base">
               The Benue State Government Public Order Application and Issuance
@@ -144,12 +143,12 @@ const Landing = () => {
               backgroundPosition: "center",
               backgroundSize: "cover",
             }}
-            className=" w-[48%] h-[560px] bg-blue-200"
+            className=" w-full lg:w-[48%] h-[400px] md:h-[560px] bg-blue-200"
           ></div>
         </div>
       </div>
       {/* services */}
-      <div className=" px-14 py-16 bg-[#006531]">
+      <div className=" px-4 md:px-14 py-8 md:py-16 bg-[#006531]">
         <p className=" font-Cabin font-bold text-center text-[#ffffff] text-3xl">
           Services
         </p>
@@ -157,7 +156,7 @@ const Landing = () => {
           User generated content in real-time will have multiple touchpoints for
           offshoring.
         </p>
-        <div className=" mt-16 w-full grid grid-cols-4 gap-8">
+        <div className=" mt-16 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* service 1 */}
           <div className=" w-full">
             <img src={orgperm} alt="" />
@@ -221,7 +220,7 @@ const Landing = () => {
         </div>
       </div>
       {/* how it works */}
-      <div className=" w-full py-16 px-14">
+      <div className=" w-full py-8 md:py-16 px-4 md:px-14">
         <p className=" font-Cabin font-bold text-center text-[#01903C] text-3xl">
           How it works
         </p>
@@ -229,7 +228,7 @@ const Landing = () => {
           How our system transfrom the way you apply for permit and license
         </p>
 
-        <div className=" mt-16 grid grid-cols-3 gap-6">
+        <div className=" mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {works.map((item, index) => (
             <div
               key={index}
@@ -248,7 +247,7 @@ const Landing = () => {
         </div>
       </div>
       {/* benefits */}
-      <div className=" bg-[#006531] px-14 py-16">
+      <div className=" bg-[#006531] px-4 md:px-14 py-8 md:py-16">
         <p className=" font-Cabin font-bold text-center text-[#ffffff] text-3xl">
           Benefits
         </p>
@@ -256,16 +255,16 @@ const Landing = () => {
           Details about our cutting edge system for Public Order Application and
           Issuance.
         </p>
-        <div className=" mt-16 flex items-center w-full justify-between">
+        <div className=" mt-12 md:mt-16 flex flex-col space-y-6 md:space-y-8 lg:space-y-0 lg:flex-row items-center w-full justify-between">
           <div
             style={{
               backgroundImage: `url(${pexel1})`,
               backgroundPosition: "",
               backgroundSize: "cover",
             }}
-            className=" w-[48%] h-[560px]"
+            className=" w-full lg:w-[48%] h-[400px] md:h-[560px]"
           ></div>
-          <div className=" w-[48%]">
+          <div className="lg:w-[48%] w-full">
             <p className=" font-Inter font-bold text-[#ffffff] text-3xl">
               Benefits of using the system
             </p>

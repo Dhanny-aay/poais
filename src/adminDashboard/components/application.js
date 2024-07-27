@@ -81,8 +81,8 @@ const Application = () => {
           </p>
         </div>
 
-        <div className="overflow-x-auto mt-4">
-          <div className="min-w-full border border-[#EAEBF0] rounded-[10px]">
+        <div className="mt-4">
+          <div className="min-w-full border border-[#EAEBF0] overflow-x-auto rounded-[10px]">
             <table className="min-w-full rounded-[10px]">
               <thead>
                 <tr>
