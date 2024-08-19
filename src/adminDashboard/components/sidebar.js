@@ -11,6 +11,12 @@ import resour from "./assets/BookOpenText.svg";
 import logo from "./assets/Logo.svg";
 import close from "./assets/close.svg";
 import gear from "./assets/Gear.svg";
+import permit from "./assets/permit.svg";
+import permitAc from "./assets/greenLoca.svg";
+import user from "./assets/User.svg";
+import userThree from "./assets/UsersThree.svg";
+import IdentificationBadge from "./assets/IdentificationBadge.svg";
+import IdentificationBadgeAC from "./assets/IdentificationBadgeGreen.svg";
 import logout from "./assets/logout.svg";
 import {
   AdminActivePageContext,
@@ -30,6 +36,16 @@ const Sidebar = () => {
       page: "Application",
     },
     { name: "Payments", img: wallet, activeImg: walletAc, page: "Payments" },
+    { name: "Permits", img: permit, activeImg: permitAc, page: "Permits" },
+    { name: "Users", img: user, activeImg: user, page: "Users" },
+    { name: "Staffs", img: userThree, activeImg: userThree, page: "Staffs" },
+    { name: "Locations", img: permit, activeImg: permitAc, page: "Locations" },
+    {
+      name: "Roles and Permissions",
+      img: IdentificationBadge,
+      activeImg: IdentificationBadgeAC,
+      page: "RolesandPermissions",
+    },
 
     {
       name: "Notifications",
@@ -95,7 +111,7 @@ const Sidebar = () => {
                     className={`font-Cabin font-semibold text-xs ${
                       activePage === item.page
                         ? "text-[#01903C]"
-                        : "text-[#929292]"
+                        : "text-[#BEC2C5]"
                     }`}
                   >
                     {item.name}
@@ -123,7 +139,7 @@ const Sidebar = () => {
                       className={`font-Cabin font-semibold text-xs ${
                         activePage === item.page
                           ? "text-[#01903C]"
-                          : "text-[#929292]"
+                          : "text-[#BEC2C5]"
                       }`}
                     >
                       {item.name}

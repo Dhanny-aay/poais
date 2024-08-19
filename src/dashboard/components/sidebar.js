@@ -107,7 +107,7 @@ const Sidebar = () => {
                     className={`font-Cabin font-semibold text-xs ${
                       activePage === item.page
                         ? "text-[#01903C]"
-                        : "text-[#929292]"
+                        : "text-[#BEC2C5]"
                     }`}
                   >
                     {item.name}
@@ -135,7 +135,7 @@ const Sidebar = () => {
                       className={`font-Cabin font-semibold text-xs ${
                         activePage === item.page
                           ? "text-[#01903C]"
-                          : "text-[#929292]"
+                          : "text-[#BEC2C5]"
                       }`}
                     >
                       {item.name}
