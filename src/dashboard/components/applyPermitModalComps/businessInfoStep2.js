@@ -24,13 +24,30 @@ const BusinessInfoStep2 = () => {
         htmlFor=""
         className="w-full mt-4 flex flex-col text-[#272D37] font-Inter font-medium text-xs"
       >
-        CAC Registration Number
+        Business Type
         <input
           type="text"
           className=" w-full text-[#919BA7] font-normal font-Inter text-sm mt-2 border border-[#DAE0E6] rounded-[6px] px-4 py-3"
           name=""
           id=""
         />
+      </label>
+      <label
+        htmlFor=""
+        className="w-full mt-4 flex flex-row items-end justify-between text-[#272D37] font-Inter font-medium text-xs"
+      >
+        <div className=" w-[70%]">
+          CAC Registration Number
+          <input
+            type="text"
+            className=" w-full text-[#919BA7] font-normal font-Inter text-sm mt-2 border border-[#DAE0E6] rounded-[6px] px-4 py-3"
+            name=""
+            id=""
+          />
+        </div>
+        <button className=" h-full w-[28%]  rounded-[8px] font-Inter text-white font-semibold text-xs bg-[#01903C] py-[15px]">
+          Verify
+        </button>
       </label>
       <div className=" flex flex-row items-center justify-between w-full mt-4">
         <label

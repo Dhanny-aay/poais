@@ -11,7 +11,7 @@ const RejectedApp = () => {
     dateSubmitted: "May 2, 2024",
     rejectionDate: "May 2, 2024",
     rejectionReason: "Incomplete Documentation",
-    status: "Reviewing",
+    status: "Rejected",
   });
 
   const totalPages = 6;
@@ -30,8 +30,8 @@ const RejectedApp = () => {
 
   const getStatusClasses = (status) => {
     switch (status) {
-      case "Reviewing":
-        return "text-[#EFC131] bg-[#EFC1311A]";
+      case "Rejected":
+        return "text-[#FF4E3E] bg-[#FF4E3E1A]";
       default:
         return "";
     }

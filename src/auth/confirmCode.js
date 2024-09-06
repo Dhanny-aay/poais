@@ -1,6 +1,20 @@
+import { useNavigate } from "react-router-dom";
 import logo from "./assets/Benue-State-Logo-New 1.svg";
+import { useEffect, useState } from "react";
 
 const ConfirmCode = () => {
+  const [email, setEmail] = useState("");
+  const [otp, setOTP] = useState("");
+  const navigate = useNavigate();
+
+  // Effect to retrieve email from localStorage on component mount
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("poais_email");
+    if (storedEmail) {
+      setEmail(storedEmail);
+    }
+  }, []);
+
   return (
     <>
       <div className="w-full h-dvh flex flex-col justify-center items-center p-6 md:p-12">

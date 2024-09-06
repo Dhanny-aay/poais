@@ -20,10 +20,17 @@ import close from "./assets/close.svg";
 import chat from "./assets/ChatText.svg";
 import gear from "./assets/Gear.svg";
 import logout from "./assets/logout.svg";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const { activePage, setActivePage } = useContext(ActivePageContext);
   const { sidebarVisible, setSidebarVisible } = useContext(SidebarContext);
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    localStorage.clear();
+    navigate("/login"); // Redirect to login
+  };
 
   const sidebar = [
     { name: "Home", img: home, activeImg: homeAc, page: "Home" },
@@ -40,12 +47,12 @@ const Sidebar = () => {
       activeImg: fileSearchAc,
       page: "Validation",
     },
-    {
-      name: "Notifications",
-      img: bell,
-      activeImg: bellAc,
-      page: "Notifications",
-    },
+    // {
+    //   name: "Notifications",
+    //   img: bell,
+    //   activeImg: bellAc,
+    //   page: "Notifications",
+    // },
     {
       name: "Resources",
       img: resour,
@@ -66,7 +73,7 @@ const Sidebar = () => {
   return (
     <>
       <div
-        className={`fixed top-0 left-0 z-[999] w-[80%] md:w-[40%] lg:w-[20%] h-[100vh] border-r border-[#E4E7EC] bg-white ${
+        className={`fixed top-0 left-0 z-[990] w-[80%] md:w-[40%] lg:w-[20%] h-[100vh] border-r border-[#E4E7EC] bg-white ${
           sidebarVisible
             ? "lg:translate-x-0 translate-x-0"
             : "lg:translate-x-0 -translate-x-full"
@@ -157,7 +164,12 @@ const Sidebar = () => {
                       </p>
                     </span>
                   </div>
-                  <img src={logout} alt="" />
+                  <img
+                    onClick={handleLogOut}
+                    src={logout}
+                    className=" cursor-pointer"
+                    alt=""
+                  />
                 </div>
               </div>
             </div>

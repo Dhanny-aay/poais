@@ -3,21 +3,27 @@ import { SidebarContext } from "../context/ActivePageContext";
 import ApprovedApp from "./applicationComps/approvedApp";
 import PendingApp from "./applicationComps/pendingApp";
 import RejectedApp from "./applicationComps/rejectedApp";
+import InitializedApp from "./applicationComps/initializedApp";
 
 const Application = () => {
   const { sidebarVisible, setSidebarVisible } = useContext(SidebarContext);
-  const [activeButton, setActiveButton] = useState("ApprovedApplications");
+  const [activeButton, setActiveButton] = useState("initializedApplications");
 
   const buttons = [
     {
-      label: "Approved Applications",
-      value: "ApprovedApplications",
-      component: <ApprovedApp />,
+      label: "Initialized Applications",
+      value: "initializedApplications",
+      component: <InitializedApp />,
     },
     {
       label: "Pending Applications",
       value: "PendingApplications",
       component: <PendingApp />,
+    },
+    {
+      label: "Approved Applications",
+      value: "ApprovedApplications",
+      component: <ApprovedApp />,
     },
     {
       label: "Rejected Applications",

@@ -1,4 +1,11 @@
-import { useState } from "react";
+import {
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+  useMemo,
+  useRef,
+} from "react";
 import ApplyStep1 from "./applyPermitModalComps/applyStep1";
 import BusinessApplyStep2 from "./applyPermitModalComps/businessApplyStep2";
 import BusinessInfoStep2 from "./applyPermitModalComps/businessInfoStep2";
@@ -15,164 +22,131 @@ import PaymentStep7 from "./applyPermitModalComps/paymentStep7";
 import UndertakingStep6 from "./applyPermitModalComps/undertakingStep6";
 import fileplus from "./assets/FilePlus.svg";
 import xclose from "./assets/XClose button.svg";
+import { TypeContext } from "../context/ActivePageContext";
+import {
+  CategoryIDContext,
+  IdentifierContext,
+} from "../context/applicationContext";
+import { handleGetApplicationByID } from "../../controllers/applicationController";
+import {
+  ApplicationDependencyContext,
+  SameAsDriverContext,
+} from "../context/verifyContext";
 
 const ApplyPermitModal = ({ setMakeModalVisible }) => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [permitType, setPermitType] = useState("");
-  const [category, setCategory] = useState("");
+  const [loading, setLoading] = useState(true);
+  const { cateID } = useContext(CategoryIDContext);
+  const { identifier } = useContext(IdentifierContext);
+  const { same_as_driver } = useContext(SameAsDriverContext);
+  const { type } = useContext(TypeContext);
+  const { applicationDependency } = useContext(ApplicationDependencyContext);
+  const [vehicleObject, setVehicleObject] = useState(null);
+  const [applicationDetails, setApplicationDetails] = useState(null);
 
-  const individualMotorFlow = [
-    MotorApplyStep2,
-    OwnerInfoStep3,
-    OwnerInfoIDStep3,
-    DriverInfoStep4,
-    DriverInfoIDstep4,
-    LocationApplyStep5,
-    UndertakingStep6,
-    PaymentStep7,
-  ];
+  const componentMap = useMemo(
+    () => ({
+      Event: [EventApplyStep2],
+      Applicant: [OwnerInfoStep3, OwnerInfoIDStep3],
+      Vehicle: [MotorApplyStep2],
+      Driver: [DriverInfoStep4, DriverInfoIDstep4],
+      Business: [OrgInfoStep3, OrgInfoIDStep3],
+      Location: [LocationApplyStep5],
+      Undertaking: [UndertakingStep6],
+      Payment: [PaymentStep7],
+    }),
+    []
+  );
 
-  const organizationMotorFlow = [
-    MotorApplyStep2,
-    OrgInfoStep3,
-    OrgInfoIDStep3,
-    DriverInfoStep4,
-    DriverInfoIDstep4,
-    LocationApplyStep5,
-    UndertakingStep6,
-    PaymentStep7,
-  ];
+  const getDynamicFlow = useCallback(() => {
+    const dynamicFlow = applicationDependency.flatMap((dependency) => {
+      if (dependency === "Driver" && same_as_driver) {
+        return [];
+      }
+      return componentMap[dependency] || [];
+    });
 
-  const individualEventFlow = [
-    EventApplyStep2,
-    OwnerInfoStep3,
-    OwnerInfoIDStep3,
-    LocationApplyStep5,
-    UndertakingStep6,
-    PaymentStep7,
-  ];
+    return [...dynamicFlow, UndertakingStep6, PaymentStep7];
+  }, [applicationDependency, same_as_driver, componentMap]);
 
-  const organizationEventFlow = [
-    EventApplyStep2,
-    OrgInfoStep3,
-    OrgInfoIDStep3,
-    LocationApplyStep5,
-    UndertakingStep6,
-    PaymentStep7,
-  ];
+  const currentFlow = useMemo(getDynamicFlow, [getDynamicFlow]);
 
-  const individualBusinessFlow = [
-    BusinessApplyStep2,
-    BusinessInfoStep2,
-    OwnerInfoStep3,
-    OwnerInfoIDStep3,
-    LocationApplyStep5,
-    UndertakingStep6,
-    PaymentStep7,
-  ];
-
-  const organizationBusinessFlow = [
-    BusinessApplyStep2,
-    BusinessInfoStep2,
-    OrgInfoStep3,
-    OrgInfoIDStep3,
-    LocationApplyStep5,
-    UndertakingStep6,
-    PaymentStep7,
-  ];
-
-  const getCurrentFlow = () => {
-    if (permitType === "Motor" && category === "individual")
-      return individualMotorFlow;
-    if (permitType === "Motor" && category === "organization")
-      return organizationMotorFlow;
-    if (permitType === "Event" && category === "individual")
-      return individualEventFlow;
-    if (permitType === "Event" && category === "organization")
-      return organizationEventFlow;
-    if (permitType === "Business" && category === "individual")
-      return individualBusinessFlow;
-    if (permitType === "Business" && category === "organization")
-      return organizationBusinessFlow;
-    return [];
-  };
-
-  const currentFlow = getCurrentFlow();
-
-  const handleNext = () => {
-    if (currentStep < currentFlow.length) {
-      setCurrentStep(currentStep + 1);
+  const fetchApplication = useCallback(async () => {
+    try {
+      const data = await handleGetApplicationByID(identifier);
+      if (data) {
+        setApplicationDetails(data);
+      } else {
+        // enqueueSnackbar("Failed to fetch profile data", { variant: "error" });
+      }
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+    } finally {
+      setLoading(false);
     }
-  };
+  }, [identifier]);
 
-  const handleBack = () => {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
+  useEffect(() => {
+    fetchApplication();
+  }, [cateID, fetchApplication]);
+
+  // Centralized handleNext function
+  const handleNext = useCallback(() => {
+    if (currentStep < currentFlow.length - 1) {
+      setCurrentStep((prev) => prev + 1);
     }
-  };
+  }, [currentStep, currentFlow.length]);
+
+  // Centralized handleBack function
+  const handleBack = useCallback(() => {
+    setCurrentStep((prev) => (prev > 0 ? prev - 1 : prev));
+  }, []);
+
+  // Reference for the step container
+  const stepContainerRef = useRef(null);
+
+  // Scroll to top on step change
+  useEffect(() => {
+    if (stepContainerRef.current) {
+      stepContainerRef.current.scrollTop = 0;
+    }
+  }, [currentStep]);
 
   const renderStep = () => {
-    if (currentStep === 0) {
-      return (
-        <ApplyStep1 setPermitType={setPermitType} setCategory={setCategory} />
-      );
+    if (loading) {
+      return <ApplyStep1 />;
     }
-    const StepComponent = currentFlow[currentStep - 1];
-    return <StepComponent />;
+
+    const StepComponent = currentFlow[currentStep];
+
+    return <StepComponent handleNext={handleNext} handleBack={handleBack} />;
   };
 
   return (
-    <>
-      <div className=" w-full md:w-[120%] h-full bg-[#1212128d] z-[99999] fixed top-0 md:-left-[20%] p-6 flex justify-center items-center">
-        <div className=" md:ml-[20%] bg-[#FFFFFF] p-6 rounded-[15px] h-[500px] 2xl:h-[700px] w-[600px]">
-          <div className=" w-full h-full overflow-auto ">
-            <span className=" w-full flex items-start justify-between">
-              <img src={fileplus} className="" alt="" />
-              <img
-                onClick={() => {
-                  setMakeModalVisible(false);
-                }}
-                src={xclose}
-                className=" "
-                alt=""
-              />
-            </span>
-            <p className=" font-Cabin font-semibold text-lg text-[#272D37]">
-              Application for Permit
+    <div className=" w-full md:w-[120%] h-full bg-[#1212128d] z-[999] fixed top-0 md:-left-[20%] p-6 flex justify-center items-center">
+      <div className=" md:ml-[20%] bg-[#FFFFFF] p-6 rounded-[15px] h-[500px] 2xl:h-[700px] w-[600px]">
+        <div className=" w-full h-full overflow-auto ">
+          <span className=" w-full flex items-start justify-between">
+            <img src={fileplus} alt="" />
+            <img
+              onClick={() => setMakeModalVisible(false)}
+              src={xclose}
+              alt=""
+            />
+          </span>
+          {type && (
+            <p className=" font-Cabin capitalize font-semibold text-lg text-[#272D37]">
+              Application for {type}
             </p>
-            <p className=" text-[#5F6D7E] font-Inter font-normal text-sm mt-1 ">
-              Fill all required information to get a permit
-            </p>
-            {renderStep()}
-            <div className="w-full mt-4 grid grid-cols-2 gap-4">
-              {currentStep === 0 ? (
-                <button
-                  onClick={() => {
-                    setMakeModalVisible(false);
-                  }}
-                  className="w-full py-3 font-Inter rounded-md text-[#272D37] font-semibold border border-[#DAE0E6] text-base"
-                >
-                  Cancel
-                </button>
-              ) : (
-                <button
-                  onClick={handleBack}
-                  className="w-full py-3 font-Inter rounded-md text-[#272D37] font-semibold border border-[#DAE0E6] text-base"
-                >
-                  Back
-                </button>
-              )}
-              <button
-                onClick={handleNext}
-                className="w-full py-3 font-Inter rounded-md text-[#fff] bg-[#01903C] font-semibold flex justify-center items-center text-base"
-              >
-                {currentStep === currentFlow.length ? "Submit" : "Next"}
-              </button>
-            </div>
-          </div>
+          )}
+          <p className=" text-[#5F6D7E] font-Inter font-normal text-sm mt-1 ">
+            Fill all required information to get a permit
+          </p>
+
+          {renderStep()}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

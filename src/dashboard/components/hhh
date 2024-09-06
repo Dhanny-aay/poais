@@ -1,0 +1,45 @@
+// Proceed based on the current step and flow
+    if (currentFlow[currentStep] === UndertakingStep6) {
+      handleSubmission(
+        handleUpdateApplication,
+        formData,
+        (response) => {
+          setLoading1(false);
+          setCurrentStep((prev) => prev + 1);
+          fetchPermitApplications();
+          setPaymentResponse(response.data);
+        },
+        (error) => {
+          setLoading1(false);
+          console.log(error);
+        }
+      );
+    } else if (currentFlow[currentStep] === MotorApplyStep2) {
+      handleSubmission(
+        handleVehicleSubmit,
+        { vehicle: vehicleObject },
+        (response) => {
+          setLoading1(false);
+          setCurrentStep((prev) => prev + 1);
+          setTriggerValidation(true);
+        },
+        (error) => {
+          setLoading1(false);
+          console.log(error);
+        }
+      );
+    } else if (currentFlow[currentStep] === EventApplyStep2) {
+      handleSubmission(
+        handleEventSubmit,
+        { event: eventObject },
+        (response) => {
+          setLoading1(false);
+          setCurrentStep((prev) => prev + 1);
+          setTriggerValidation(true);
+        },
+        (error) => {
+          setLoading1(false);
+          console.log(error);
+        }
+      );
+    } 

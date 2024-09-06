@@ -2,72 +2,24 @@ import { useContext, useState } from "react";
 import { SidebarContext } from "../context/ActivePageContext";
 import left from "./assets/left.svg";
 import right from "./assets/right.svg";
+import LoadingTable from "./loadingTable";
 
-const Payment = () => {
+const Payment = ({ loadingTransactions, transactions }) => {
   const { sidebarVisible, setSidebarVisible } = useContext(SidebarContext);
   const [currentPage, setCurrentPage] = useState(5);
 
-  const transactions = [
-    {
-      id: 1,
-      title: "Club House Permit",
-      transactionId: "DFT1CA4",
-      time: "2021-05-21 12:39",
-      amount: "₦11500",
-      status: "Processing",
-    },
-    {
-      id: 2,
-      title: "Club House Permit",
-      transactionId: "DFT1CA4",
-      time: "2021-05-21 12:39",
-      amount: "₦11500",
-      status: "Failed",
-    },
-    {
-      id: 3,
-      title: "Club House Permit",
-      transactionId: "DFT1CA4",
-      time: "2021-05-21 12:39",
-      amount: "₦11500",
-      status: "Successful",
-    },
-    {
-      id: 4,
-      title: "Club House Permit",
-      transactionId: "DFT1CA4",
-      time: "2021-05-21 12:39",
-      amount: "₦11500",
-      status: "Successful",
-    },
-    {
-      id: 5,
-      title: "Club House Permit",
-      transactionId: "DFT1CA4",
-      time: "2021-05-21 12:39",
-      amount: "₦11500",
-      status: "Successful",
-    },
-    {
-      id: 6,
-      title: "Club House Permit",
-      transactionId: "DFT1CA4",
-      time: "2021-05-21 12:39",
-      amount: "₦11500",
-      status: "Successful",
-    },
-  ];
-
   const getStatusClasses = (status) => {
     switch (status) {
-      case "Processing":
+      case "Pending":
         return "text-[#EFC131] bg-[#EFC1311A]";
       case "Failed":
         return "text-[#FF4E3E] bg-[#FF4E3E1A]";
-      case "Successful":
+      case "Paid":
         return "text-[#17BD8D] bg-[#17BD8D1A]";
+      case "Incomplete":
+        return "text-[#FF9100] bg-[#FF91001A]"; // Orange for Incomplete
       default:
-        return "";
+        return "text-[#A0AEC0] bg-[#A0AEC01A]"; // Light Gray for Default
     }
   };
 
@@ -75,6 +27,23 @@ const Payment = () => {
 
   const goToPage = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+
+  const formatDateTime = (dateString) => {
+    const date = new Date(dateString);
+
+    // Check if the date is valid
+    if (isNaN(date.getTime())) {
+      return "Invalid Date";
+    }
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
   };
 
   return (
@@ -135,72 +104,91 @@ const Payment = () => {
                 </th>
               </thead>
               <tbody>
-                {transactions.map((transaction, index) => (
-                  <tr key={transaction.id}>
-                    <td className="px-4 py-3 border-b text-left font-Inter text-[#5F6D7E] text-sm font-medium">
-                      {index + 1 < 10 ? `0${index + 1}` : index + 1}
-                    </td>
-                    <td className="px-4 py-3 border-b text-left font-Inter text-[#5F6D7E] text-sm font-medium">
-                      {transaction.title}
-                    </td>
-                    <td className="px-4 py-3 border-b text-left font-Inter text-[#5F6D7E] text-sm font-medium">
-                      {transaction.transactionId}
-                    </td>
-                    <td className="px-4 py-3 border-b text-left font-Inter text-[#5F6D7E] text-sm font-medium">
-                      {transaction.time}
-                    </td>
-                    <td className="px-4 py-3 border-b text-left font-Inter text-[#5F6D7E] text-sm font-medium">
-                      {transaction.amount}
-                    </td>
-                    <td className="px-4 py-3 border-b text-left">
-                      <span
-                        className={`px-2 py-1 rounded-full font-Inter text-xs font-normal ${getStatusClasses(
-                          transaction.status
-                        )}`}
-                      >
-                        {transaction.status}
-                      </span>
+                {loadingTransactions ? (
+                  <tr>
+                    <td colSpan="6">
+                      <LoadingTable />
                     </td>
                   </tr>
-                ))}
+                ) : transactions.length === 0 ? (
+                  <tr>
+                    <td
+                      colSpan="6"
+                      className="py-4 text-center text-sm font-Inter text-[#5F6D7E]"
+                    >
+                      There are no transactions.
+                    </td>
+                  </tr>
+                ) : (
+                  transactions.map((transaction, index) => (
+                    <tr key={transaction.id}>
+                      <td className="px-4 py-3 border-b text-left font-Inter text-[#5F6D7E] text-sm font-medium">
+                        {index + 1 < 10 ? `0${index + 1}` : index + 1}
+                      </td>
+                      <td className="px-4 py-3 border-b text-left font-Inter text-[#5F6D7E] text-sm font-medium">
+                        {transaction.title}
+                      </td>
+                      <td className="px-4 py-3 border-b text-left font-Inter text-[#5F6D7E] text-sm font-medium">
+                        {transaction.identifier}
+                      </td>
+                      <td className="px-4 py-3 border-b text-left font-Inter text-[#5F6D7E] text-sm font-medium">
+                        {formatDateTime(transaction.created_at)}
+                      </td>
+                      <td className="px-4 py-3 border-b text-left font-Inter text-[#5F6D7E] text-sm font-medium">
+                        {"₦" + transaction.total}
+                      </td>
+                      <td className="px-4 py-3 border-b text-left">
+                        <span
+                          className={`px-2 py-1 rounded-full font-Inter text-xs font-normal ${getStatusClasses(
+                            transaction.status
+                          )}`}
+                        >
+                          {transaction.status}
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
         </div>
 
-        <div className="flex justify-between items-center mt-4">
-          <button
-            onClick={() => currentPage > 1 && goToPage(currentPage - 1)}
-            className="px-3 py-1 text-sm flex font-Inter font-medium text-[#5F6D7E] border border-gray-300 rounded-md"
-          >
-            <img src={left} className="h-5 w-5 mr-2" alt="Left Arrow" />
-            Prev
-          </button>
-          <div className="flex space-x-1">
-            {[...Array(totalPages)].map((_, i) => (
-              <button
-                key={i}
-                onClick={() => goToPage(i + 1)}
-                className={`px-3 py-1 text-sm ${
-                  currentPage === i + 1
-                    ? "bg-[#01903C] text-white"
-                    : "text-[#5F6D7E] border border-gray-300"
-                } rounded-md`}
-              >
-                {i + 1}
-              </button>
-            ))}
+        {!loadingTransactions && transactions.length > 0 && (
+          <div className="flex justify-between items-center mt-4">
+            <button
+              onClick={() => currentPage > 1 && goToPage(currentPage - 1)}
+              className="px-3 py-1 text-sm flex font-Inter font-medium text-[#5F6D7E] border border-gray-300 rounded-md"
+            >
+              <img src={left} className="h-5 w-5 mr-2" alt="Left Arrow" />
+              Prev
+            </button>
+            <div className="flex space-x-1">
+              {[...Array(totalPages)].map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => goToPage(i + 1)}
+                  className={`px-3 py-1 text-sm ${
+                    currentPage === i + 1
+                      ? "bg-[#01903C] text-white"
+                      : "text-[#5F6D7E] border border-gray-300"
+                  } rounded-md`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+            </div>
+            <button
+              onClick={() =>
+                currentPage < totalPages && goToPage(currentPage + 1)
+              }
+              className="px-3 py-1 text-sm flex font-Inter font-medium items-center text-[#5F6D7E] border border-gray-300 rounded-md"
+            >
+              Next
+              <img src={right} className="h-5 ml-2 w-5" alt="Right Arrow" />
+            </button>
           </div>
-          <button
-            onClick={() =>
-              currentPage < totalPages && goToPage(currentPage + 1)
-            }
-            className="px-3 py-1 text-sm flex font-Inter font-medium items-center text-[#5F6D7E] border border-gray-300 rounded-md"
-          >
-            Next
-            <img src={right} className="h-5 ml-2 w-5" alt="Right Arrow" />
-          </button>
-        </div>
+        )}
       </div>
     </>
   );

@@ -6,8 +6,9 @@ import {
 import pend from "./assets/pend.svg";
 import prove from "./assets/proved.svg";
 import reject from "./assets/reject.svg";
+import LoadingTable from "./loadingTable";
 
-const Home = () => {
+const Home = ({ transactions, loadingTransactions }) => {
   const { activePage, setActivePage } = useContext(ActivePageContext);
   const { sidebarVisible, setSidebarVisible } = useContext(SidebarContext);
 
@@ -21,68 +22,31 @@ const Home = () => {
     { tag: "Rejected", number: "03", icon: reject },
   ];
 
-  const transactions = [
-    {
-      id: 1,
-      title: "Club House Permit",
-      transactionId: "DFT1CA4",
-      time: "2021-05-21 12:39",
-      amount: "₦11500",
-      status: "Processing",
-    },
-    {
-      id: 2,
-      title: "Club House Permit",
-      transactionId: "DFT1CA4",
-      time: "2021-05-21 12:39",
-      amount: "₦11500",
-      status: "Failed",
-    },
-    {
-      id: 3,
-      title: "Club House Permit",
-      transactionId: "DFT1CA4",
-      time: "2021-05-21 12:39",
-      amount: "₦11500",
-      status: "Successful",
-    },
-    {
-      id: 4,
-      title: "Club House Permit",
-      transactionId: "DFT1CA4",
-      time: "2021-05-21 12:39",
-      amount: "₦11500",
-      status: "Successful",
-    },
-    {
-      id: 5,
-      title: "Club House Permit",
-      transactionId: "DFT1CA4",
-      time: "2021-05-21 12:39",
-      amount: "₦11500",
-      status: "Successful",
-    },
-    {
-      id: 6,
-      title: "Club House Permit",
-      transactionId: "DFT1CA4",
-      time: "2021-05-21 12:39",
-      amount: "₦11500",
-      status: "Successful",
-    },
-  ];
-
   const getStatusClasses = (status) => {
     switch (status) {
-      case "Processing":
+      case "Pending":
         return "text-[#EFC131] bg-[#EFC1311A]";
       case "Failed":
         return "text-[#FF4E3E] bg-[#FF4E3E1A]";
-      case "Successful":
+      case "Paid":
         return "text-[#17BD8D] bg-[#17BD8D1A]";
+      case "Incomplete":
+        return "text-[#FF9100] bg-[#FF91001A]"; // Orange for Incomplete
       default:
-        return "";
+        return "text-[#A0AEC0] bg-[#A0AEC01A]"; // Light Gray for Default
     }
+  };
+
+  const formatDateTime = (dateString) => {
+    const date = new Date(dateString);
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
   };
 
   return (
@@ -169,34 +133,51 @@ const Home = () => {
                 </th>
               </thead>
               <tbody>
-                {transactions.map((transaction, index) => (
-                  <tr key={transaction.id}>
-                    <td className="px-4 py-3 border-b text-left font-Inter text-[#5F6D7E] text-sm font-medium">
-                      {index + 1 < 10 ? `0${index + 1}` : index + 1}
-                    </td>
-                    <td className="px-4 py-3 border-b text-left font-Inter text-[#5F6D7E] text-sm font-medium">
-                      {transaction.title}
-                    </td>
-                    <td className="px-4 py-3 border-b text-left font-Inter text-[#5F6D7E] text-sm font-medium">
-                      {transaction.transactionId}
-                    </td>
-                    <td className="px-4 py-3 border-b text-left font-Inter text-[#5F6D7E] text-sm font-medium">
-                      {transaction.time}
-                    </td>
-                    <td className="px-4 py-3 border-b text-left font-Inter text-[#5F6D7E] text-sm font-medium">
-                      {transaction.amount}
-                    </td>
-                    <td className="px-4 py-3 border-b text-left">
-                      <span
-                        className={`px-2 py-1 rounded-full font-Inter text-xs font-normal ${getStatusClasses(
-                          transaction.status
-                        )}`}
-                      >
-                        {transaction.status}
-                      </span>
+                {loadingTransactions ? (
+                  <tr>
+                    <td colSpan="6">
+                      <LoadingTable />
                     </td>
                   </tr>
-                ))}
+                ) : transactions.length === 0 ? (
+                  <tr>
+                    <td
+                      colSpan="6"
+                      className="py-4 text-center text-sm font-Inter text-[#5F6D7E]"
+                    >
+                      There are no transactions.
+                    </td>
+                  </tr>
+                ) : (
+                  transactions.map((transaction, index) => (
+                    <tr key={transaction.id}>
+                      <td className="px-4 py-3 border-b text-left font-Inter text-[#5F6D7E] text-sm font-medium">
+                        {index + 1 < 10 ? `0${index + 1}` : index + 1}
+                      </td>
+                      <td className="px-4 py-3 border-b text-left font-Inter text-[#5F6D7E] text-sm font-medium">
+                        {transaction.title}
+                      </td>
+                      <td className="px-4 py-3 border-b text-left font-Inter text-[#5F6D7E] text-sm font-medium">
+                        {transaction.identifier}
+                      </td>
+                      <td className="px-4 py-3 border-b text-left font-Inter text-[#5F6D7E] text-sm font-medium">
+                        {formatDateTime(transaction.created_at)}
+                      </td>
+                      <td className="px-4 py-3 border-b text-left font-Inter text-[#5F6D7E] text-sm font-medium">
+                        {"₦" + transaction.total}
+                      </td>
+                      <td className="px-4 py-3 border-b text-left">
+                        <span
+                          className={`px-2 py-1 rounded-full font-Inter text-xs font-normal ${getStatusClasses(
+                            transaction.status
+                          )}`}
+                        >
+                          {transaction.status}
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
